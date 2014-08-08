@@ -1,0 +1,6 @@
+png(filename = 'plot1.png', width = 500, height = 500, units = 'px')
+library(sqldf)
+data <- read.csv.sql("household_power_consumption.txt", sep=";",sql = 'select * from file where Date = "1/2/2007" union select * from file where Date = "2/2/2007" ')
+BetterDate <- strptime(paste(data$Date,"-",data$Time),format="%d/%m/%Y - %H:%M:%S")
+hist(data$Global_active_power,col="red",main="Global Active Power",xlab="Global Active Power (kilowatts)",ylab="Frequency")
+dev.off()
